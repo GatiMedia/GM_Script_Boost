@@ -1,0 +1,264 @@
+Group {
+name GM_Script_Boost
+tile_color 0xff9455ff
+selected true
+xpos -1
+ypos -58
+addUserKnob {20 User l Script_Boost}
+addUserKnob {26 postage l "<b><font color=#FFFFFF size=\"4\" >Postage Stamp</font><b>"}
+addUserKnob {22 postage_dis l "Disable Postage Stamp" t "Allows you to disable the Postage Stamp on all nodes in the script." -STARTLINE T "nodes_classes = \[\"Read\", \"PostageStamp\", \"Constant\", \"ColorBars\", \"CheckerBoard2\", \"ColorWheel\"]\n\nfor node in nuke.allNodes(group=nuke.root()):\n    if node.Class() in nodes_classes:\n        try:\n            node\[\"postage_stamp\"].setValue(False)\n        except Exception:\n            pass\n"}
+addUserKnob {22 postage_en l "Enable Postage Stamp" t "Allows you to enable the Postage Stamp on all nodes in the script." -STARTLINE T "nodes_classes = \[\"Read\", \"PostageStamp\", \"Constant\", \"ColorBars\", \"CheckerBoard2\", \"ColorWheel\"]\n\nfor node in nuke.allNodes(group=nuke.root()):\n    if node.Class() in nodes_classes:\n        try:\n            node\[\"postage_stamp\"].setValue(True)\n        except Exception:\n            pass\n"}
+addUserKnob {22 sel_dis l "Disable Selected Postage" t "Allows you to disable the Postage Stamp on selected nodes.\n\n" T "nuke.root().begin()\n\nnodes_classes = \[\"Read\", \"PostageStamp\", \"Constant\", \"ColorBars\", \"CheckerBoard2\", \"ColorWheel\"]\n\nfor node in nuke.selectedNodes():\n    if node.Class() in nodes_classes:\n        try:\n            node\[\"postage_stamp\"].setValue(False)\n        except Exception:\n            pass" +STARTLINE}
+addUserKnob {22 sel_en l "Enable Selected Postage" t "Allows you to enable the Postage Stamp on selected nodes." -STARTLINE T "nuke.root().begin()\n\nnodes_classes = \[\"Read\", \"PostageStamp\", \"Constant\", \"ColorBars\", \"CheckerBoard2\", \"ColorWheel\"]\n\nfor node in nuke.selectedNodes():\n    if node.Class() in nodes_classes:\n        try:\n            node\[\"postage_stamp\"].setValue(True)\n        except Exception:\n            pass"}
+addUserKnob {26 node_perf l "<b><font color=#FFFFFF size=\"4\" >Node Performance</font><b>"}
+addUserKnob {22 perf_show l "Show " t "Allows you to view the nodes performance that are connected to the viewer." -STARTLINE T "nuke.startPerformanceTimers()\n\nfor n in nuke.allNodes(recurseGroups = True):\n  print n.fullName()\n  print n.performanceInfo()"}
+addUserKnob {22 perf_res l Reset t "Allows you to reset the performance timer." -STARTLINE T "nuke.resetPerformanceTimers()\n"}
+addUserKnob {22 perf_hide l Hide t "Allows you to turns off the performance view." -STARTLINE T "nuke.stopPerformanceTimers()\n"}
+addUserKnob {26 bookm l "<b><font color=#FFFFFF size=\"4\" >Bookmark</font><b>"}
+addUserKnob {22 dis_book_all l "Disable Bookmark" T "nodes_classes = \[\"BackdropNode\"]\n\nfor node in nuke.allNodes(group=nuke.root()):\n    if node.Class() in nodes_classes:\n        try:\n            node\[\"bookmark\"].setValue(False)\n        except Exception:\n            pass" +STARTLINE}
+addUserKnob {22 en_book_all l "Enable Bookmark" -STARTLINE T "nodes_classes = \[\"BackdropNode\"]\n\nfor node in nuke.allNodes(group=nuke.root()):\n    if node.Class() in nodes_classes:\n        try:\n            node\[\"bookmark\"].setValue(True)\n        except Exception:\n            pass"}
+addUserKnob {22 dis_book_sel l "Disable Selected Bookmark" T "nuke.root().begin()\n\nnodes_classes = \[\"BackdropNode\"]\n\nfor node in nuke.selectedNodes():\n    if node.Class() in nodes_classes:\n        try:\n            node\[\"bookmark\"].setValue(False)\n        except Exception:\n            pass" +STARTLINE}
+addUserKnob {22 en_book_sel l "Enable Selected Bookmark" -STARTLINE T "nuke.root().begin()\n\nnodes_classes = \[\"BackdropNode\"]\n\nfor node in nuke.selectedNodes():\n    if node.Class() in nodes_classes:\n        try:\n            node\[\"bookmark\"].setValue(True)\n        except Exception:\n            pass"}
+addUserKnob {26 i l "" +STARTLINE T "This function only affect Backdrop nodes"}
+addUserKnob {26 ""}
+addUserKnob {22 tuts l Tutorial t "Have a look at the tutorial. " -STARTLINE T "import os\nimport sys\n\ntry:\n    import subprocess\n    def _run(cmd, shell, wait):\n        opener = subprocess.Popen(cmd, shell=shell)\n        if wait:\n            opener.wait()\n        return opener.pid\nexcept ImportError:\n    import popen2\n    def _run(cmd, shell, wait):\n        opener = popen2.Popen3(cmd)\n        if wait:\n            opener.wait()\n        return opener.pid\n\ndef _open(url, wait=0):\n    if sys.platform == \"darwin\":\n        cmd = \[\"open\", url]\n    elif hasattr(os, \"startfile\"):\n        return os.startfile(url)\n    elif os.environ.has_key(\"KDE_FULL_SESSION\") or os.environ.has_key(\"KDE_MULTIHEAD\") or \\\n        os.environ.has_key(\"GNOME_DESKTOP_SESSION_ID\") or os.environ.has_key(\"GNOME_KEYRING_SOCKET\"):\n        cmd = \[\"xdg-open\", url]\n    else:\n        raise OSError, \"Desktop not supported.\"\n\n    return _run(cmd, 0, wait)\n\n_open('www.gatimedia.co.uk/script-boost')\n"}
+addUserKnob {26 ""}
+addUserKnob {26 TEXT l "" +STARTLINE T "<font color=#808080 size=\"5\" >1.01 Beta version</font>"}
+addUserKnob {26 HeadlineB l "" +STARTLINE T "<font color=#808080 size=\"2\">GM_Script Boost© by Attila Gasparetz</font>"}
+addUserKnob {26 ""}
+addUserKnob {20 info l Information n 1}
+info 0
+addUserKnob {26 dropd_text l "" +STARTLINE T "\nThe node don`t need to be connectd to work!\n\nWhen you use `Show Node Performance` you need to \nattach the Viewer to the pipe that`s performance you \nwant to view and recommended to `Hide Node Performance` \nwhen you finished as it slows down your script.\n\n"}
+addUserKnob {20 endGroup n -1}
+addUserKnob {20 nodetoggle l NodeToggle}
+addUserKnob {20 draw1 l Draw n 1}
+draw1 0
+addUserKnob {6 roto l Roto -STARTLINE}
+addUserKnob {6 rotopaint l RotoPaint -STARTLINE}
+addUserKnob {6 dustbust l DustBust -STARTLINE}
+addUserKnob {6 grain l Grain +STARTLINE}
+addUserKnob {6 glint l Glint -STARTLINE}
+addUserKnob {6 grid l Grid -STARTLINE}
+addUserKnob {6 flare l Flare +STARTLINE}
+addUserKnob {6 lightwrap l LightWrap -STARTLINE}
+addUserKnob {6 markerremoval l MarkerRemoval -STARTLINE}
+addUserKnob {6 noise l Noise +STARTLINE}
+addUserKnob {6 radial l Radial -STARTLINE}
+addUserKnob {6 ramp l Ramp -STARTLINE}
+addUserKnob {6 rectangle l Rectangle +STARTLINE}
+addUserKnob {6 sparkles l Sparkles -STARTLINE}
+addUserKnob {6 text l Text -STARTLINE}
+addUserKnob {20 endGroup_1 l endGroup n -1}
+addUserKnob {20 time1 l Time n 1}
+time1 0
+addUserKnob {6 frameblend l FrameBlend +STARTLINE}
+addUserKnob {6 kronos l Kronos -STARTLINE}
+addUserKnob {6 oflow l OFlow -STARTLINE}
+addUserKnob {6 retime l Retime +STARTLINE}
+addUserKnob {6 timeecho l TimeEcho -STARTLINE}
+addUserKnob {6 timeoffset l TimeOffset -STARTLINE}
+addUserKnob {6 timewarp l TimeWarp +STARTLINE}
+addUserKnob {6 timeclip l TimeClip -STARTLINE}
+addUserKnob {6 vectortomotion l VectorToMotion -STARTLINE}
+addUserKnob {6 vectorgenerator l VectorGenerator +STARTLINE}
+addUserKnob {20 endGroup_2 l endGroup n -1}
+addUserKnob {20 color1 l Color n 1}
+color1 0
+addUserKnob {6 colormatrix l ColorMatrix -STARTLINE}
+addUserKnob {6 expression l Expression -STARTLINE}
+addUserKnob {6 ociocolorspace l OCIOColorspace +STARTLINE}
+addUserKnob {6 ocioctransform l OCIOTransform -STARTLINE}
+addUserKnob {6 vectorfield l Vectorfield -STARTLINE}
+addUserKnob {6 colorlookup l ColorLookUp +STARTLINE}
+addUserKnob {6 colorspace l ColorSpace -STARTLINE}
+addUserKnob {6 log2lin l Log2Lin -STARTLINE}
+addUserKnob {26 filter l Filter}
+addUserKnob {6 defocus l Defocus -STARTLINE}
+addUserKnob {6 denoise l Denoise -STARTLINE}
+addUserKnob {6 dirblur l DirBlur -STARTLINE}
+addUserKnob {6 edgeblur l EdgeBlur +STARTLINE}
+addUserKnob {6 emboss l Emboss -STARTLINE}
+addUserKnob {6 glow l Glow -STARTLINE}
+addUserKnob {6 godrays l GodRays +STARTLINE}
+addUserKnob {6 laplacian l Laplacian -STARTLINE}
+addUserKnob {6 matrix l Matrix -STARTLINE}
+addUserKnob {6 median l Median +STARTLINE}
+addUserKnob {6 motionblur l MotionBlur -STARTLINE}
+addUserKnob {6 motionblur2d l MotionBlur2D -STARTLINE}
+addUserKnob {6 motionblur3d l MotionBlur3D +STARTLINE}
+addUserKnob {6 sharpen l Sharpen -STARTLINE}
+addUserKnob {6 soften l Soften -STARTLINE}
+addUserKnob {6 vectorblur l VectorBlur +STARTLINE}
+addUserKnob {6 volumerays l VolumeRays -STARTLINE}
+addUserKnob {6 zdefocus l ZDefocus -STARTLINE}
+addUserKnob {6 zslice l ZSlice +STARTLINE}
+addUserKnob {20 endGroup_3 l endGroup n -1}
+addUserKnob {20 keyer1 l Keyer n 1}
+keyer1 0
+addUserKnob {6 ibkgizmo l IBKGizmo -STARTLINE}
+addUserKnob {6 ibkcolour l IBKColour -STARTLINE}
+addUserKnob {6 primatte l Primatte -STARTLINE}
+addUserKnob {6 keylight l Keylight +STARTLINE}
+addUserKnob {6 keyer_1 l Keyer -STARTLINE}
+addUserKnob {20 endGroup_4 l endGroup n -1}
+addUserKnob {20 merge1 l Merge n 1}
+merge1 0
+addUserKnob {6 addmix l AddMix -STARTLINE}
+addUserKnob {6 keymix l KeyMix -STARTLINE}
+addUserKnob {6 copybbox l CopyBBox -STARTLINE}
+addUserKnob {6 dissolve l Dissolve +STARTLINE}
+addUserKnob {6 switch l Switch -STARTLINE}
+addUserKnob {6 merge_1 l Merge -STARTLINE}
+addUserKnob {6 mergeexpression l MergeExpression +STARTLINE}
+addUserKnob {6 timedissolve l TimeDissolve -STARTLINE}
+addUserKnob {6 zmerge l ZMerge -STARTLINE}
+addUserKnob {20 endGroup_5 l endGroup n -1}
+addUserKnob {20 transform1 l Transform n 1}
+transform1 0
+addUserKnob {6 transform_1 l Transform -STARTLINE}
+addUserKnob {6 transformmasked l TransformMasked -STARTLINE}
+addUserKnob {6 card3d l Card3D -STARTLINE}
+addUserKnob {6 adjustbbox l AdjustBBox +STARTLINE}
+addUserKnob {6 blackoutside l BlackOutside -STARTLINE}
+addUserKnob {6 camerashake l CameraShake -STARTLINE}
+addUserKnob {6 crop l Crop +STARTLINE}
+addUserKnob {6 cornerpin l CornerPin -STARTLINE}
+addUserKnob {6 sphericaltransform l SphericalTransform -STARTLINE}
+addUserKnob {6 idistort l iDistort +STARTLINE}
+addUserKnob {6 vectordistort l VectorDistort -STARTLINE}
+addUserKnob {6 lensdistort l LensDistort -STARTLINE}
+addUserKnob {6 reformat l Reformat +STARTLINE}
+addUserKnob {6 reconcile3d l Reconcile3D -STARTLINE}
+addUserKnob {6 pointsto3d l PointsTo3D -STARTLINE}
+addUserKnob {6 tracker l Tracker -STARTLINE}
+addUserKnob {6 tviscale l TVIScale -STARTLINE}
+addUserKnob {6 gridwarp l GridWarp +STARTLINE}
+addUserKnob {6 splinewarp l SplineWarp -STARTLINE}
+addUserKnob {6 stabilize l Stabilize -STARTLINE}
+addUserKnob {6 stmap l STMap +STARTLINE}
+addUserKnob {6 tile l Tile -STARTLINE}
+addUserKnob {20 endGroup_6 l endGroup n -1}
+addUserKnob {20 threed l 3D n 1}
+threed 0
+addUserKnob {6 axis l Axis -STARTLINE}
+addUserKnob {6 camera l Camera -STARTLINE}
+addUserKnob {6 cameratracker l CameraTracker -STARTLINE}
+addUserKnob {6 depthgenerator l DepthGenerator +STARTLINE}
+addUserKnob {6 depthtoposition l DepthToPosition -STARTLINE}
+addUserKnob {6 scene l Scene -STARTLINE}
+addUserKnob {6 scanlinerender l ScanlineRender +STARTLINE}
+addUserKnob {26 ""}
+addUserKnob {6 card l Card -STARTLINE}
+addUserKnob {6 cube l Cube -STARTLINE}
+addUserKnob {6 cylinder l Cylinder -STARTLINE}
+addUserKnob {6 depthtopoints l DepthToPoints +STARTLINE}
+addUserKnob {6 modelbuilder l ModelBuilder -STARTLINE}
+addUserKnob {6 pointcloudgenerator l PointCloudGenerator -STARTLINE}
+addUserKnob {6 positiontopoints l PositionToPoints +STARTLINE}
+addUserKnob {6 poissonmesh l PoissonMesh -STARTLINE}
+addUserKnob {6 sphere l Sphere -STARTLINE}
+addUserKnob {6 readgeo l ReadGeo +STARTLINE}
+addUserKnob {26 ""}
+addUserKnob {6 light l Light -STARTLINE}
+addUserKnob {6 point l Point -STARTLINE}
+addUserKnob {6 direct l Direct -STARTLINE}
+addUserKnob {6 spot l Spot +STARTLINE}
+addUserKnob {6 environment l Environment -STARTLINE}
+addUserKnob {6 relight l Relight -STARTLINE}
+addUserKnob {26 ""}
+addUserKnob {6 transformgeo l TransformGeo -STARTLINE}
+addUserKnob {6 mergegeo l MergeGeo -STARTLINE}
+addUserKnob {6 crosstalkgeo l CrosstalkGeo -STARTLINE}
+addUserKnob {6 displacegeo l DisplaceGeo +STARTLINE}
+addUserKnob {6 editgeo l EditGeo -STARTLINE}
+addUserKnob {6 geoselect l GeoSelect -STARTLINE}
+addUserKnob {6 lookupgeo l LookupGeo +STARTLINE}
+addUserKnob {6 loggeo l LogGeo -STARTLINE}
+addUserKnob {6 normals l Normals -STARTLINE}
+addUserKnob {6 proceduralnoise l ProceduralNoise +STARTLINE}
+addUserKnob {6 radialdistort l RadialDistort -STARTLINE}
+addUserKnob {6 trilinear l Trilinear -STARTLINE}
+addUserKnob {6 uvproject l UVProject +STARTLINE}
+addUserKnob {26 ""}
+addUserKnob {6 ambienocclusion l AmbienOcclusion -STARTLINE}
+addUserKnob {6 applymaterial l ApplyMaterial -STARTLINE}
+addUserKnob {6 basicmaterial l BasicMaterial -STARTLINE}
+addUserKnob {6 fillmat l FillMat +STARTLINE}
+addUserKnob {6 mergemat l MergeMat -STARTLINE}
+addUserKnob {6 blendmat l BlendMat -STARTLINE}
+addUserKnob {6 project3d l Project3D +STARTLINE}
+addUserKnob {6 diffuse l Diffuse -STARTLINE}
+addUserKnob {6 emission l Emission -STARTLINE}
+addUserKnob {6 phong l Phong +STARTLINE}
+addUserKnob {6 specular l Specular -STARTLINE}
+addUserKnob {6 displacement l Displacement -STARTLINE}
+addUserKnob {6 uvtile l UVTile +STARTLINE}
+addUserKnob {6 wireframe l WireFrame -STARTLINE}
+addUserKnob {6 transmission l Transmission -STARTLINE}
+addUserKnob {6 reflection l Reflection +STARTLINE}
+addUserKnob {6 refraction l Refraction -STARTLINE}
+addUserKnob {20 endGroup_7 l endGroup n -1}
+addUserKnob {20 particles1 l Particles n 1}
+particles1 0
+addUserKnob {6 pemitter l P.Emitter -STARTLINE}
+addUserKnob {6 pbounce l P.Bounce -STARTLINE}
+addUserKnob {6 pcache l P.Cache -STARTLINE}
+addUserKnob {6 pcurve l P.Curve +STARTLINE}
+addUserKnob {6 pdirectionalforce l P.DirectionalForce -STARTLINE}
+addUserKnob {6 pdrag l P.Drag -STARTLINE}
+addUserKnob {6 pexpression l P.Expression +STARTLINE}
+addUserKnob {6 pemerge l P.Merge -STARTLINE}
+addUserKnob {6 pemotionalign l P.MotionAlign -STARTLINE}
+addUserKnob {6 pgravity l P.Gravity +STARTLINE}
+addUserKnob {6 plookat l P.LookAt -STARTLINE}
+addUserKnob {6 ppointforce l P.PointForce -STARTLINE}
+addUserKnob {6 pspeedlimit l P.SpeedLimit +STARTLINE}
+addUserKnob {6 pspawn l P.Spawn -STARTLINE}
+addUserKnob {6 pturbulance l P.Turbulance -STARTLINE}
+addUserKnob {6 pvortex l P.Vortex +STARTLINE}
+addUserKnob {6 pwind l P.Wind -STARTLINE}
+addUserKnob {6 psettings l P.Settings -STARTLINE}
+addUserKnob {6 ptogeo l P.ToGeo +STARTLINE}
+addUserKnob {20 endGroup_8 l endGroup n -1}
+addUserKnob {20 deep1 l Deep n 1}
+deep1 0
+addUserKnob {6 dcolorcorrect l D.ColorCorrect -STARTLINE}
+addUserKnob {6 dcrop l D.Crop -STARTLINE}
+addUserKnob {6 dexpression l D.Expression -STARTLINE}
+addUserKnob {6 dfromframes l D.FromFrames +STARTLINE}
+addUserKnob {6 dfromimage l D.FromImage -STARTLINE}
+addUserKnob {6 dholdout l D.HoldOut -STARTLINE}
+addUserKnob {6 dpmerge l D.Merge +STARTLINE}
+addUserKnob {6 dread l D.Read -STARTLINE}
+addUserKnob {6 drecolor l D.Recolor -STARTLINE}
+addUserKnob {6 dreformat l D.Reformat +STARTLINE}
+addUserKnob {6 dsample l D.Sample -STARTLINE}
+addUserKnob {6 dtoimage l D.ToImage -STARTLINE}
+addUserKnob {6 dtopoints l D.ToPoints +STARTLINE}
+addUserKnob {6 dtransform l D.Transform -STARTLINE}
+addUserKnob {20 endGroup_9 l endGroup n -1}
+addUserKnob {26 ""}
+addUserKnob {22 select_none l "Select None" -STARTLINE T "import nuke\n\nknobs = \['frameblend','kronos','oflow','retime','timeecho','timeoffset','timewarp','timeclip','vectortomotion','vectorgenerator','colormatrix','expression','ociocolorspace','ocioctransform','vectorfield','colorlookup','colorspace','log2lin','defocus','denoise','dirblur','edgeblur','emboss','glow','godrays','laplacian','matrix','median','motionblur','motionblur2d','motionblur3d','sharpen','soften','vectorblur','volumerays','zdefocus','zslice','ibkgizmo','ibkcolour','primatte','keylight','keyer_1','addmix','keymix','copybbox','dissolve','switch','merge_1','mergeexpression','timedissolve','zmerge','transform_1','transformmasked','card3d','adjustbbox','blackoutside','camerashake','crop','cornerpin','sphericaltransform','idistort','vectordistort','lensdistort','reformat','reconcile3d','pointsto3d','tracker','tviscale','gridwarp','splinewarp','stabilize','stmap','tile','axis','camera','cameratracker','depthgenerator','depthtoposition','scene','scanlinerender','card','cube','cylinder','depthtopoints','modelbuilder','pointcloudgenerator','positiontopoints','poissonmesh','sphere','readgeo','light','point','direct','spot','environment','relight','transformgeo','mergegeo','crosstalkgeo','displacegeo','editgeo','geoselect','lookupgeo','loggeo','normals','proceduralnoise','radialdistort','trilinear','uvproject','ambienocclusion','applymaterial','basicmaterial','fillmat','mergemat','blendmat','project3d','diffuse','emission','phong','specular','displacement','uvtile','wireframe','transmission','reflection','refraction','pemitter','pbounce','pcache','pcurve','pdirectionalforce','pdrag','pexpression','pemerge','pemotionalign','pgravity','plookat','ppointforce','pspeedlimit','pspawn','pturbulance','pvortex','pwind','psettings','ptogeo','dcolorcorrect','dcrop','dexpression','dfromframes','dfromimage','dholdout','dpmerge','dread','drecolor','dreformat','dsample','dtoimage','dtopoints','dtransform','roto','rotopaint','dustbust','grain','glint','grid','flare','lightwrap','markerremoval','noise','radial','ramp','rectangle','sparkles','text']\n\nfor knob in knobs:\n    nuke.thisNode()\[knob].setValue(False)\n"}
+addUserKnob {22 select_all l "Select All" -STARTLINE T "import nuke\n\nknobs = \['frameblend','kronos','oflow','retime','timeecho','timeoffset','timewarp','timeclip','vectortomotion','vectorgenerator','colormatrix','expression','ociocolorspace','ocioctransform','vectorfield','colorlookup','colorspace','log2lin','defocus','denoise','dirblur','edgeblur','emboss','glow','godrays','laplacian','matrix','median','motionblur','motionblur2d','motionblur3d','sharpen','soften','vectorblur','volumerays','zdefocus','zslice','ibkgizmo','ibkcolour','primatte','keylight','keyer_1','addmix','keymix','copybbox','dissolve','switch','merge_1','mergeexpression','timedissolve','zmerge','transform_1','transformmasked','card3d','adjustbbox','blackoutside','camerashake','crop','cornerpin','sphericaltransform','idistort','vectordistort','lensdistort','reformat','reconcile3d','pointsto3d','tracker','tviscale','gridwarp','splinewarp','stabilize','stmap','tile','axis','camera','cameratracker','depthgenerator','depthtoposition','scene','scanlinerender','card','cube','cylinder','depthtopoints','modelbuilder','pointcloudgenerator','positiontopoints','poissonmesh','sphere','readgeo','light','point','direct','spot','environment','relight','transformgeo','mergegeo','crosstalkgeo','displacegeo','editgeo','geoselect','lookupgeo','loggeo','normals','proceduralnoise','radialdistort','trilinear','uvproject','ambienocclusion','applymaterial','basicmaterial','fillmat','mergemat','blendmat','project3d','diffuse','emission','phong','specular','displacement','uvtile','wireframe','transmission','reflection','refraction','pemitter','pbounce','pcache','pcurve','pdirectionalforce','pdrag','pexpression','pemerge','pemotionalign','pgravity','plookat','ppointforce','pspeedlimit','pspawn','pturbulance','pvortex','pwind','psettings','ptogeo','dcolorcorrect','dcrop','dexpression','dfromframes','dfromimage','dholdout','dpmerge','dread','drecolor','dreformat','dsample','dtoimage','dtopoints','dtransform','roto','rotopaint','dustbust','grain','glint','grid','flare','lightwrap','markerremoval','noise','radial','ramp','rectangle','sparkles','text']\n\nfor knob in knobs:\n    nuke.thisNode()\[knob].setValue(True)\n"}
+addUserKnob {26 "" +STARTLINE}
+addUserKnob {22 enableselected l "Enable Selected" +STARTLINE}
+addUserKnob {22 disableselectd l "Disable Selected" -STARTLINE}
+addUserKnob {26 classes l "" +STARTLINE +INVISIBLE T "\['Roto','RotoPaint','DustBust','Grain2','Glint','Grid','Flare','LightWrap','MarkerRemoval','Noise','Radial','Ramp','Rectangle','Sparkles','Text2','FrameBlend','Kronos','OFlow2','Retime','TimeEcho','TimeOffset','TimeWarp','TimeClip','VectorToMotion','VectorGenerator','ColorMatrix','Expression','OCIOColorSpace','OCIOFileTransform','Vectorfield','ColorLookup','Colorspace','Log2Lin','Defocus','Denoise2','DirBlurWrapper','EdgeBlur','Emboss','Glow2','GodRays','Laplacian','Matrix','Median','MotionBlur','MotionBlur2D','MotionBlur3D','Sharpen','Soften','VectorBlur2','VolumeRays','ZDefocus2','ZSlice','IBKGizmoV3','IBKColourV3','Primatte3','OFXuk.co.thefoundry.keylight.keylight_v201','Keyer','AddMix','Keymix','CopyBBox','Dissolve','Switch','Merge2','MergeExpression','TimeDissolve','ZMerge','Transform','TransformMasked','Card3D','AdjBBox','BlackOutside','CameraShake3','Crop','CornerPin2D','SphericalTransform','IDistort','VectorDistort','LensDistortion2','Reformat','Reconcile3D','PointsTo3D','Tracker4','TVIscale','GridWarp3','SplineWarp3','Stabilize2D','STMap','Tile','Axis2','Camera2','CameraTracker','DepthGenerator','DepthToPosition','Scene','ScanlineRender','Card2','Cube','Cylinder','DepthToPoints','ModelBuilder','PointCloudGenerator','PositionToPoints2','PoissonMesh','Sphere','ReadGeo2','Light2','Light','DirectLight','Spotlight','Environment','ReLight','TransformGeo','MergeGeo','CrosstalkGeo','DisplaceGeo','EditGeo','GeoSelect','LookupGeo','LogGeo','Normals','ProcGeo','RadialDistort','Trilinear','UVProject','AmbientOcclusion','ApplyMaterial','BasicMaterial','FillMat','MergeMat','BlendMat','Project3D2','Diffuse','Emission','Phong','Specular','Displacement','UVTile2','Wireframe','Transmission',','Reflection','Refraction','ParticleEmitter','ParticleBounce','ParticleCache','ParticleCurve','ParticleDirectionalForce','ParticleDrag','ParticleExpression','ParticleMerge','ParticleMotionAlign','ParticleGravity','ParticleLookAt','ParticlePointForce','ParticleSpeedLimit','ParticleSpawn','ParticleTurbulence','ParticleVortex','ParticleWind','ParticleSettings','ParticleToGeo','DeepColorCorrect2','DeepCrop','DeepExpression','DeepFromFrames','DeepFromImage','DeepHoldout2','DeepMerge','DeepRead','DeepRecolor','DeepReformat','DeepSample','DeepToImage','DeepToPoints','DeepTransform']"}
+}
+Input {
+inputs 0
+name Input
+xpos -150
+ypos 14
+}
+NoOp {
+name NothingIsInHere
+xpos -150
+ypos 86
+}
+Output {
+name Output1
+xpos -150
+ypos 158
+}
+end_group
