@@ -1,8 +1,11 @@
+set cut_paste_input [stack 0]
+version 11.1 v6
+push $cut_paste_input
 Group {
  name GM_Script_Boost
  tile_color 0xff9455ff
  selected true
- xpos 923
+ xpos 921
  ypos -273
  addUserKnob {20 User l Script_Boost}
  addUserKnob {26 postage l "<b><font color=#FFFFFF size=\"4\" >Postage Stamp</font><b>"}
@@ -74,7 +77,6 @@ Group {
  addUserKnob {6 log2lin l Log2Lin -STARTLINE}
  addUserKnob {20 endGroup_3 l endGroup n -1}
  addUserKnob {20 filter1 l Filter n 1}
- filter1 0
  addUserKnob {6 defocus l Defocus -STARTLINE}
  addUserKnob {6 denoise l Denoise -STARTLINE}
  addUserKnob {6 dirblur l DirBlur -STARTLINE}
